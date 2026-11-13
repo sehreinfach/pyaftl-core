@@ -1,0 +1,26 @@
+services:
+  pyaftl-core:
+    build:
+      context: .
+      args:
+        # must match the owner of your kubeconfig (id -u / id -g)
+        PYAFTL_UID: ${PYAFTL_UID:-1000}
+        PYAFTL_GID: ${PYAFTL_GID:-1000}
+    image: pyaftl-core:latest
+    container_name: pyaftl-core
+    ports:
+      - "127.0.0.1:5000:5000"
+    environment:
+      # optional: "dev" loads etc/config.dev.json
+      - AFTL_ENV=${AFTL_ENV:-}
+    volumes:
+      # kubeconfig on the host; override with KUBECONFIG_FILE=/path/to/config
+      - "${KUBECONFIG_FILE:-${HOME}/.kube/config}:/home/pyaftl/.kube/config:ro"
+      - "./etc:/app/etc:ro"
+      - workspace:/app/workspace
+      - data:/app/data
+    restart: unless-stopped
+
+volumes:
+  workspace:
+  data:

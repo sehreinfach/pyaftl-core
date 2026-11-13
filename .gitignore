@@ -1,0 +1,5 @@
+.idea/
+__pycache__
+/data/db.sqlite3
+/workspace/ansible/
+/etc/config.dev.json

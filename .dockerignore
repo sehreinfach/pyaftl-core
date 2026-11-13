@@ -1,0 +1,9 @@
+.git
+.idea
+__pycache__
+data/db.sqlite3
+etc/config.dev.json
+workspace/*
+!workspace/.gitkeep
+Dockerfile
+.dockerignore

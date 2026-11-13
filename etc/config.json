@@ -1,0 +1,23 @@
+{
+  "ENVIRONMENT": "production",
+  "DEBUG": "False",
+  "PORT": 5000,
+  "LISTEN": "0.0.0.0",
+  "APP": {
+    "name": "pyAFTL-core",
+    "working_dir": "workspace/"
+  },
+  "GIT": {
+    "ansible": {
+      "repo_url": "REPO_URL/pyAFTL/ansible.git",
+      "branch": "main",
+      "path": "ansible"
+    },
+    "access_token": "GIT_AUTH_TOKEN"
+  },
+  "RUNNER": {
+    "image": "pyaftl-runner:latest",
+    "kube_namespace": "aftl",
+    "name": "pyaftl-runner"
+  }
+}
