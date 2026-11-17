@@ -20,7 +20,7 @@ else:
 logging.basicConfig(level=logging.INFO)
 config.load_kube_config()
 
-def read_group_hosts(group, sections=("linux", "home")):
+def read_group_hosts(group, sections):
     """
     reads the hosts listed under the given sections of groups/<group>.ini
     from the local Ansible repo copy

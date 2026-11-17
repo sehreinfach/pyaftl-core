@@ -78,14 +78,16 @@ def job_run_group():
     """
     git.git_pull(repo="ansible")
     data = request.get_json(silent=True) or {}
-    playbook = request.form.get('playbook') or data.get('playbook')
-    group = request.form.get('group') or data.get('group')
+    playbook = data['playbook']
+    group = data['group']
+    #playbook = request.form.get('playbook') or data.get('playbook')
+    #group = request.form.get('group') or data.get('group')
     if not playbook or not group:
         return jsonify(error="parameters 'playbook' and 'group' are required"), 400
     if not re.fullmatch(r"[A-Za-z0-9_-]+", group):
         return jsonify(error=f"invalid group name: {group!r}"), 400
     try:
-        hosts = kube.read_group_hosts(group)
+        hosts = kube.read_group_hosts(group, sections=group)
     except FileNotFoundError:
         return jsonify(error=f"group not found: {group}"), 404
     if not hosts:
